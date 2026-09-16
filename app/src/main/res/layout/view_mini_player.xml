@@ -20,11 +20,27 @@
         android:maxLines="1" />
 
     <ImageButton
+        android:id="@+id/btnPrevious"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_skip_previous"
+        android:contentDescription="Previous" />
+
+    <ImageButton
         android:id="@+id/btnPlayPause"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@android:drawable/ic_media_play"
+        android:src="@drawable/ic_play"
         android:contentDescription="Play/Pause" />
+
+    <ImageButton
+        android:id="@+id/btnNext"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_skip_next"
+        android:contentDescription="Next" />
 
 </LinearLayout>

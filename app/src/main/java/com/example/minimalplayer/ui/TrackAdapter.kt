@@ -11,12 +11,13 @@ import com.example.minimalplayer.R
 import com.example.minimalplayer.data.Track
 
 class TrackAdapter(
-    private val onTrackClick: (Track) -> Unit
+    private val onTrackClick: (Track) -> Unit,
+    private val onTrackLongClick: ((Track) -> Unit)? = null
 ) : ListAdapter<Track, TrackAdapter.TrackViewHolder>(TrackDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrackViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_track, parent, false)
-        return TrackViewHolder(view, onTrackClick)
+        return TrackViewHolder(view, onTrackClick, onTrackLongClick)
     }
 
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
@@ -25,7 +26,8 @@ class TrackAdapter(
 
     class TrackViewHolder(
         itemView: View,
-        private val onTrackClick: (Track) -> Unit
+        private val onTrackClick: (Track) -> Unit,
+        private val onTrackLongClick: ((Track) -> Unit)?
     ) : RecyclerView.ViewHolder(itemView) {
         private val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private val tvDuration: TextView = itemView.findViewById(R.id.tvDuration)
@@ -45,6 +47,10 @@ class TrackAdapter(
 
             itemView.setOnClickListener {
                 onTrackClick(track)
+            }
+            itemView.setOnLongClickListener {
+                onTrackLongClick?.invoke(track)
+                true
             }
         }
     }

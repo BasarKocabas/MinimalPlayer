@@ -9,7 +9,7 @@
         android:allowBackup="true"
         android:label="Minimal Player"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.MinimalPlayer">
 
         <activity
             android:name=".ui.MainActivity"

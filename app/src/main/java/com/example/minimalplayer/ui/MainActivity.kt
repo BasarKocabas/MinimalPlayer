@@ -37,7 +37,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private lateinit var miniPlayerContainer: FrameLayout
     private lateinit var tvMiniPlayerTitle: TextView
+    private lateinit var btnPrevious: ImageButton
     private lateinit var btnPlayPause: ImageButton
+    private lateinit var btnNext: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,14 +58,58 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             }
         }.attach()
 
+        val detailContainer = findViewById<FrameLayout>(R.id.detailContainer)
+        viewPager.registerOnPageChangeCallback(object : androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (detailContainer.visibility == View.VISIBLE) {
+                    supportFragmentManager.popBackStack()
+                    detailContainer.visibility = View.GONE
+                }
+            }
+        })
+
         miniPlayerContainer = findViewById(R.id.miniPlayerContainer)
+
+        onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (supportFragmentManager.backStackEntryCount > 0) {
+                    supportFragmentManager.popBackStack()
+                    if (supportFragmentManager.backStackEntryCount == 1) {
+                        detailContainer.visibility = View.GONE
+                    }
+                } else {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        })
         val miniPlayerView = layoutInflater.inflate(R.layout.view_mini_player, miniPlayerContainer, true)
         tvMiniPlayerTitle = miniPlayerView.findViewById(R.id.tvMiniPlayerTitle)
+        btnPrevious = miniPlayerView.findViewById(R.id.btnPrevious)
         btnPlayPause = miniPlayerView.findViewById(R.id.btnPlayPause)
+        btnNext = miniPlayerView.findViewById(R.id.btnNext)
+
+        btnPrevious.setOnClickListener {
+            mediaController?.let {
+                if (it.currentPosition > 3000) {
+                    it.seekTo(0)
+                } else {
+                    it.seekToPreviousMediaItem()
+                }
+            }
+        }
 
         btnPlayPause.setOnClickListener {
             mediaController?.let {
                 if (it.isPlaying) it.pause() else it.play()
+            }
+        }
+
+        btnNext.setOnClickListener {
+            mediaController?.let {
+                it.seekToNextMediaItem()
             }
         }
 
@@ -72,7 +118,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         
         controllerFuture?.addListener({
             mediaController = controllerFuture?.get()
-            mediaController?.let { setupPlayerListener(it) }
+            mediaController?.let { 
+                setupPlayerListener(it)
+                updateMiniPlayerUI(it)
+            }
         }, ContextCompat.getMainExecutor(this))
     }
 
@@ -147,7 +196,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         miniPlayerContainer.visibility = View.VISIBLE
         tvMiniPlayerTitle.text = controller.currentMediaItem?.mediaMetadata?.title ?: "Unknown Track"
         
-        val icon = if (controller.isPlaying) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play
+        val icon = if (controller.isPlaying) R.drawable.ic_pause else R.drawable.ic_play
         btnPlayPause.setImageResource(icon)
     }
 
@@ -170,6 +219,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         controller.setMediaItems(mediaItems, startIndex, 0L)
         controller.prepare()
         controller.play()
+    }
+
+    fun showPlaylistDetail(playlistId: Long, playlistName: String) {
+        findViewById<FrameLayout>(R.id.detailContainer).visibility = View.VISIBLE
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.detailContainer, PlaylistDetailFragment.newInstance(playlistId, playlistName))
+            .addToBackStack("playlistDetail")
+            .commit()
     }
 
     override fun onDestroy() {

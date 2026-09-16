@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.MinimalPlayer" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Main Backgrounds -->
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
+        
+        <!-- Surface / Elevation Colors -->
+        <item name="colorSurface">@color/elevated_surface</item>
+        <item name="android:colorBackgroundFloating">@color/elevated_surface</item>
+        
+        <!-- Typography -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        
+        <!-- Dividers -->
+        <item name="android:listDivider">@color/dividers</item>
+    </style>
+</resources>

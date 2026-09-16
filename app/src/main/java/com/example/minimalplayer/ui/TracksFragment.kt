@@ -31,12 +31,35 @@ class TracksFragment : Fragment(R.layout.fragment_tracks) {
 
         repository = MusicRepository(requireContext())
         
-        adapter = TrackAdapter { track ->
-            val mainActivity = requireActivity() as MainActivity
-            val currentList = adapter.currentList
-            val index = currentList.indexOf(track)
-            mainActivity.playMusic(currentList, if (index >= 0) index else 0)
-        }
+        adapter = TrackAdapter(
+            onTrackClick = { track ->
+                val mainActivity = requireActivity() as MainActivity
+                val currentList = adapter.currentList
+                val index = currentList.indexOf(track)
+                mainActivity.playMusic(currentList, if (index >= 0) index else 0)
+            },
+            onTrackLongClick = { track ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val playlists = repository.getAllPlaylists()
+                    if (playlists.isEmpty()) {
+                        com.google.android.material.snackbar.Snackbar.make(requireView(), "Create a playlist first!", com.google.android.material.snackbar.Snackbar.LENGTH_SHORT).show()
+                        return@launch
+                    }
+                    val playlistNames = playlists.map { it.name }.toTypedArray()
+                    com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                        .setTitle("Add to Playlist")
+                        .setItems(playlistNames) { _, which ->
+                            val selectedPlaylist = playlists[which]
+                            viewLifecycleOwner.lifecycleScope.launch {
+                                val added = repository.addTrackToPlaylist(selectedPlaylist.id, track.id)
+                                val msg = if (added) "Added to ${selectedPlaylist.name}" else "Already in ${selectedPlaylist.name}"
+                                com.google.android.material.snackbar.Snackbar.make(requireView(), msg, com.google.android.material.snackbar.Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
+                        .show()
+                }
+            }
+        )
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
