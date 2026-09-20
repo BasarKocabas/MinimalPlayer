@@ -46,9 +46,12 @@ object FileImportHelper {
             try {
                 retriever.setDataSource(context, uri)
                 val extractedTitle = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
+                // Prefer album artist for consistent grouping (avoids "Artist feat. X" splits)
+                val extractedAlbumArtist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUMARTIST)
                 val extractedArtist = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)
                 if (!extractedTitle.isNullOrEmpty()) title = extractedTitle
-                if (!extractedArtist.isNullOrEmpty()) artist = extractedArtist
+                if (!extractedAlbumArtist.isNullOrEmpty()) artist = extractedAlbumArtist
+                else if (!extractedArtist.isNullOrEmpty()) artist = extractedArtist
             } catch (_: Exception) {} finally { retriever.release() }
             
             if (title == "Unknown Track") {

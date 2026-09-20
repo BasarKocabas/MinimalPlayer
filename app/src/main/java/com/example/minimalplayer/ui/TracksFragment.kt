@@ -119,7 +119,7 @@ class TracksFragment : Fragment(R.layout.fragment_tracks) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.overScrollMode = View.OVER_SCROLL_NEVER 
+        recyclerView.overScrollMode = View.OVER_SCROLL_ALWAYS
         recyclerView.isNestedScrollingEnabled = true
         recyclerView.adapter = adapter
         fastScroller.attach(recyclerView)
