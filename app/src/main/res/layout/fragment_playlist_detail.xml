@@ -51,7 +51,9 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="always"
         android:clipToPadding="false"
+        android:nestedScrollingEnabled="true"
         android:paddingBottom="16dp" />
 
 </LinearLayout>

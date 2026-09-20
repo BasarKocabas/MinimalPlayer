@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#000000</color>
     <color name="elevated_surface">#0A0A0A</color>
-    <color name="dividers">#1A1A1A</color>
+    <color name="dividers">#262626</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#888888</color>
+    <color name="accent_blue">#2979FF</color>
+    <color name="accent_blue_dark">#1C54B2</color>
 </resources>

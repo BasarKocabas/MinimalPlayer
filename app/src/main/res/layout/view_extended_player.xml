@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/black" android:padding="16dp">
+    <ImageButton android:id="@+id/btnCollapsePlayer" android:layout_width="48dp" android:layout_height="48dp" android:background="?attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_arrow_back" app:tint="@color/text_primary" android:contentDescription="Collapse Player" />
+    <ImageView android:id="@+id/ivExtendedAlbumArt" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scaleType="centerCrop" android:src="@drawable/ic_music_note" android:layout_marginVertical="16dp" />
+    <TextView android:id="@+id/tvExtendedTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="24sp" android:textStyle="bold" android:textColor="@color/text_primary" android:ellipsize="end" android:maxLines="1" android:gravity="center" />
+    <TextView android:id="@+id/tvExtendedArtist" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="18sp" android:textColor="@color/text_secondary" android:ellipsize="end" android:maxLines="1" android:gravity="center" android:layout_marginTop="4dp" />
+    <SeekBar android:id="@+id/seekBarExtended" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:progressTint="@color/accent_blue" android:thumbTint="@color/accent_blue" android:max="1000" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
+        <TextView android:id="@+id/tvExtendedCurrentTime" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:text="0:00" />
+        <TextView android:id="@+id/tvExtendedTotalTime" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:textColor="@color/text_secondary" android:text="0:00" android:gravity="end" />
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:layout_marginTop="16dp" android:layout_marginBottom="24dp">
+        <ImageButton android:id="@+id/btnExtendedRepeat" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="16dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_repeat" app:tint="@android:color/white" android:scaleType="centerInside" />
+        <ImageButton android:id="@+id/btnExtendedPrevious" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginEnd="8dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_skip_previous" app:tint="@android:color/white" />
+        <ImageButton android:id="@+id/btnExtendedPlayPause" android:layout_width="72dp" android:layout_height="72dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_play" app:tint="@android:color/white" />
+        <ImageButton android:id="@+id/btnExtendedNext" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginStart="8dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_skip_next" app:tint="@android:color/white" />
+        <View android:layout_width="52dp" android:layout_height="1dp" android:layout_marginStart="16dp" />
+    </LinearLayout>
+</LinearLayout>

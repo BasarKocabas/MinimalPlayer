@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class MusicDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class MusicDatabaseHelper(context: Context) : SQLiteOpenHelper(context.applicationContext, DATABASE_NAME, null, DATABASE_VERSION) {
 
     override fun onConfigure(db: SQLiteDatabase) {
         super.onConfigure(db)
@@ -17,6 +17,7 @@ class MusicDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 uri TEXT UNIQUE NOT NULL,
                 title TEXT NOT NULL,
+                artist TEXT NOT NULL DEFAULT 'Unknown Artist',
                 duration_ms INTEGER,
                 is_available INTEGER NOT NULL DEFAULT 1,
                 added_at INTEGER NOT NULL
@@ -54,6 +55,6 @@ class MusicDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
 
     companion object {
         private const val DATABASE_NAME = "minimal_player.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2 
     }
 }

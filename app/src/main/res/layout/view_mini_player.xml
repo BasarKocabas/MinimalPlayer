@@ -1,46 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/miniPlayerLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:background="?android:attr/colorBackgroundFloating"
-    android:elevation="8dp"
-    android:gravity="center_vertical">
-
-    <TextView
-        android:id="@+id/tvMiniPlayerTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:ellipsize="end"
-        android:maxLines="1" />
-
-    <ImageButton
-        android:id="@+id/btnPrevious"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_skip_previous"
-        android:contentDescription="Previous" />
-
-    <ImageButton
-        android:id="@+id/btnPlayPause"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_play"
-        android:contentDescription="Play/Pause" />
-
-    <ImageButton
-        android:id="@+id/btnNext"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_skip_next"
-        android:contentDescription="Next" />
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/miniPlayerLayout" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/elevated_surface" android:elevation="8dp" android:paddingTop="12dp" android:paddingBottom="8dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingHorizontal="16dp">
+        <ImageView android:id="@+id/ivMiniAlbumArt" android:layout_width="56dp" android:layout_height="56dp" android:scaleType="centerCrop" android:src="@drawable/ic_music_note" android:background="@color/dividers" android:contentDescription="Album Art" />
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp" android:layout_marginEnd="8dp">
+            <TextView android:id="@+id/tvMiniPlayerTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/text_primary" android:ellipsize="end" android:maxLines="1" />
+            <TextView android:id="@+id/tvMiniPlayerTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="13sp" android:textColor="@color/text_secondary" android:layout_marginTop="2dp" android:text="0:00 / 0:00" />
+        </LinearLayout>
+        <ImageButton android:id="@+id/btnExpandPlayer" android:layout_width="32dp" android:layout_height="32dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_expand" app:tint="@color/text_secondary" android:scaleType="fitCenter" android:contentDescription="Expand Player" android:layout_marginEnd="8dp" />
+        <ImageButton android:id="@+id/btnCloseMiniPlayer" android:layout_width="32dp" android:layout_height="32dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_close_circle" app:tint="@color/text_secondary" android:scaleType="fitCenter" android:contentDescription="Close Player" />
+    </LinearLayout>
+    <SeekBar android:id="@+id/seekBar" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginHorizontal="16dp" android:progressTint="@color/accent_blue" android:progressBackgroundTint="@color/dividers" android:thumbTint="@color/accent_blue" android:max="1000" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center" android:layout_marginTop="4dp">
+        <ImageButton android:id="@+id/btnRepeat" android:layout_width="52dp" android:layout_height="52dp" android:layout_marginEnd="16dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_repeat" app:tint="@android:color/white" android:scaleType="centerInside" android:contentDescription="Repeat" />
+        <ImageButton android:id="@+id/btnPrevious" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginEnd="8dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_skip_previous" app:tint="@android:color/white" android:scaleType="centerInside" android:contentDescription="Previous" />
+        <ImageButton android:id="@+id/btnPlayPause" android:layout_width="64dp" android:layout_height="64dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_play" app:tint="@android:color/white" android:scaleType="centerInside" android:contentDescription="Play/Pause" />
+        <ImageButton android:id="@+id/btnNext" android:layout_width="56dp" android:layout_height="56dp" android:layout_marginStart="8dp" android:background="?android:attr/selectableItemBackgroundBorderless" android:src="@drawable/ic_skip_next" app:tint="@android:color/white" android:scaleType="centerInside" android:contentDescription="Next" />
+        <View android:layout_width="52dp" android:layout_height="1dp" android:layout_marginStart="16dp" />
+    </LinearLayout>
 </LinearLayout>
